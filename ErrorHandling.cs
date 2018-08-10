@@ -2,23 +2,27 @@
 
 public static class ErrorHandling
 {
-    public static void HandleErrorByThrowingException()
-    {
-        throw new NotImplementedException("You need to implement this function.");
-    }
+    public static void HandleErrorByThrowingException() => throw new Exception();
 
     public static int? HandleErrorByReturningNullableType(string input)
     {
-        throw new NotImplementedException("You need to implement this function.");
+        int result;
+        if (int.TryParse(input, out result)) {
+            return result;
+        } else {
+            return null;
+        }
     }
 
-    public static bool HandleErrorWithOutParam(string input, out int result)
-    {
-        throw new NotImplementedException("You need to implement this function.");
-    }
+    public static bool HandleErrorWithOutParam(string input, out int result) => int.TryParse(input, out result);
 
     public static void DisposableResourcesAreDisposedWhenExceptionIsThrown(IDisposable disposableObject)
     {
-        throw new NotImplementedException("You need to implement this function.");
+        try {
+            throw new Exception();
+        }
+        finally {
+            disposableObject.Dispose();
+        }
     }
 }
